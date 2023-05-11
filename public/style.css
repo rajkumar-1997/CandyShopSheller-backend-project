@@ -1,0 +1,42 @@
+.formbox h3{
+    text-align: center;
+}
+.formbox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.tablediv{
+    
+    width: 60%;
+    margin-top: 20px;
+    margin-left: 250px;
+    height: 150px;
+   
+   
+}
+ table thead tr .tableheading{
+    
+    padding: 8px 30px ;
+    color: black;
+    margin-top: 5px;
+    
+    font-size: 17px;
+}
+table tbody tr td{
+    text-align: center;
+    color: rgb(16, 236, 16);
+    font-weight: bold;
+}
+
+#tablebody{
+    background-color: rgb(224, 22, 136);
+}
+
+#tablebody tr td {
+     padding: 4px 5px;
+     font-size: 17px;
+   
+}
