@@ -42,32 +42,24 @@ exports.sendAllCandy=async (req,res,next)=>{
 
 
 
-exports.getEditCandy= async (req,res,next)=>{
-    const candyId=req.params.candyId;
-   try{
 
-       let candy = await CandyRecord.findByPk(candyId);
-            console.log(candy);
-            res.send(candy);
-   }
-    catch(err){
-        console.log(err);
-    }
-}
 
 exports.editCandy= async (req,res,next)=>{
-    const expenseId=req.params.expenseId;
-    const updatedAmount=req.body.amount;
-    const updatedCategory=req.body.category;
+    const candyId=req.params.candyId;
+    const updatedCandyName=req.body.candyname;
+    
     const updatedDescription=req.body.description;
+    const updatedPrice=req.body.price;
+    const updatedQuantity=req.body.quantity;
 try{
 
-    let expense = await ExpenseData.findByPk(expenseId)
-         expense.amount=updatedAmount;
-         expense.category=updatedCategory;
-         expense.description=updatedDescription;
-         console.log(expense);
-          let result= await  expense.save();
+    let candy = await CandyRecord.findByPk(candyId)
+         candy.candyname=updatedCandyName;
+         candy.description=updatedDescription;
+         candy.price=updatedPrice;
+         candy.quantity= updatedQuantity;
+         console.log(candy);
+          let result= await  candy.save();
          
              console.log(result);
              res.send();

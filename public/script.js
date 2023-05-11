@@ -44,7 +44,7 @@ window.addEventListener('DOMContentLoaded',async ()=>{
 
        let response= await axios.get('http://localhost:3000/candy/load-data')
        
-            console.log(response);
+            // console.log(response);
             for(let i=0;i<response.data.allData.length;i++){
                 showDataOnScreen(response.data.allData[i]);
             }
@@ -57,7 +57,7 @@ window.addEventListener('DOMContentLoaded',async ()=>{
 
 
 function showDataOnScreen(obj){
-    console.log(obj);
+    // console.log(obj);
     let parent=document.getElementById('tablebody');
     let childHTML=` <tr  id=${obj.id}>
                  
@@ -65,7 +65,7 @@ function showDataOnScreen(obj){
     <td>${obj.description}</td>
     <td>${obj.price}</td>
     <td>${obj.quantity}</td>
-    <td><button id='${obj.id}-buy1' class="editbtn">Buy1</button><button id='${obj.id}-buy2' class="editbtn">Buy2</button><button id='${obj.id}-buy3' class="editbtn">Buy3</button></td>
+    <td><button id='${obj.id}-buy1' class="editbtn" onClick= buyOne(${obj.id})>Buy1</button><button id='${obj.id}-buy2' class="editbtn"  onClick= buyTwo(${obj.id})>Buy2</button><button id='${obj.id}-buy3' class="editbtn"  onClick= buyThree(${obj.id})>Buy3</button></td>
     
     </tr>`;
     parent.innerHTML+=childHTML;
@@ -73,14 +73,13 @@ function showDataOnScreen(obj){
     descriptionInput.value="",
     priceInput.value="",
     quantityInput.value="";
-
-    document.getElementById(`${obj.id}-buy1`).addEventListener('click', () => buyOne(obj.id));
-    document.getElementById(`${obj.id}-buy2`).addEventListener('click', () => buyTwo(obj.id));
-    document.getElementById(`${obj.id}-buy3`).addEventListener('click', () => buyThree(obj.id));
-}
+    
+   
+  }
 
 
 async function buyOne(id) {
+  console.log(id);
     const candyRow = document.getElementById(id);
     const quantityCell = candyRow.children[3];
     const nameCell=candyRow.children[0];
@@ -90,8 +89,16 @@ async function buyOne(id) {
     if (quantity > 0) {
       quantity -= 1;
       quantityCell.textContent = quantity;
+
+      let obj={
+        candyname:nameCell.textContent,
+        description:descriptionCell.textContent,
+        price:priceCell.textContent,
+        quantity: quantityCell.textContent
+
+    }
       try {
-        const response = await axios.put(`http://localhost:3000/candy/${id}`, { quantity });
+        const response = await axios.put(`http://localhost:3000/edit-candy/${id}`,obj );
         console.log(response);
       } catch (err) {
         console.log(err);
@@ -104,10 +111,27 @@ async function buyOne(id) {
   async function buyTwo(id) {
     const candyRow = document.getElementById(id);
     const quantityCell = candyRow.children[3];
+    const nameCell=candyRow.children[0];
+    const descriptionCell=candyRow.children[1];
+    const priceCell=candyRow.children[2];
     let quantity = Number(quantityCell.textContent);
-    if (quantity >= 2) {
+    if (quantity > 1) {
       quantity -= 2;
       quantityCell.textContent = quantity;
+
+      let obj={
+        candyname:nameCell.textContent,
+        description:descriptionCell.textContent,
+        price:priceCell.textContent,
+        quantity: quantityCell.textContent
+
+    }
+      try {
+        const response = await axios.put(`http://localhost:3000/edit-candy/${id}`, obj);
+        console.log(response);
+      } catch (err) {
+        console.log(err);
+      }
     } else {
       window.alert('This candy is out of stock.');
     }
@@ -116,10 +140,27 @@ async function buyOne(id) {
   async function buyThree(id) {
     const candyRow = document.getElementById(id);
     const quantityCell = candyRow.children[3];
+    const nameCell=candyRow.children[0];
+    const descriptionCell=candyRow.children[1];
+    const priceCell=candyRow.children[2];
     let quantity = Number(quantityCell.textContent);
-    if (quantity >= 3) {
+    if (quantity > 2) {
       quantity -= 3;
       quantityCell.textContent = quantity;
+
+      let obj={
+        candyname:nameCell.textContent,
+        description:descriptionCell.textContent,
+        price:priceCell.textContent,
+        quantity: quantityCell.textContent
+
+    }
+      try {
+        const response = await axios.put(`http://localhost:3000/edit-candy/${id}`, obj);
+        console.log(response);
+      } catch (err) {
+        console.log(err);
+      }
     } else {
       window.alert('This candy is out of stock.');
     }

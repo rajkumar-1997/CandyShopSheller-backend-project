@@ -12,6 +12,6 @@ router.get('/candy/load-data',candyController.sendAllCandy);
 
 
 router.put('/edit-candy/:candyId',candyController.editCandy);
-router.get('/edit-candy/:candyId',candyController.getEditCandy);
+// router.get('/edit-candy/:candyId',candyController.getEditCandy);
 
 module.exports=router;
